@@ -1,15 +1,26 @@
-/* Estilos base mejorados */
-body {
+/* Reset y estilos base */
+* {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-ambar: #FFD700;
+  --color-ambar-claro: rgba(245, 222, 179, 0.7);
+}
+
+body {
   font-family: 'Rubik', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: #f8f8f8;
+  padding: 20px;
 }
 
+/* Contenedor principal - VERIFICAR QUE ESTO SE APLIQUE */
 .vcard {
   position: relative;
   width: 100%;
@@ -18,9 +29,10 @@ body {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: white; /* Fondo blanco por defecto */
 }
 
-/* Fondo degradado ámbar suavizado */
+/* Fondo degradado ámbar - VERIFICAR VISUALIZACIÓN */
 .amber-fade {
   position: absolute;
   top: 0;
@@ -28,52 +40,49 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, 
-    rgba(255, 215, 0, 0.4) 0%,     /* Amarillo muy suave */
-    rgba(245, 222, 179, 0.3) 40%,  /* Abano claro */
-    rgba(245, 222, 179, 0.1) 70%,  /* Más transparente */
-    rgba(245, 222, 179, 0) 100%    /* Desvanecimiento completo */
+    var(--color-ambar) 0%,
+    var(--color-ambar-claro) 50%,
+    rgba(255, 255, 255, 0) 100%
   );
   z-index: 1;
+  opacity: 0.4; /* Más transparente */
 }
 
-/* Fondo de imagen más responsive */
+/* Fondo de imagen */
 .bg-pattern {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('statics/img/fondo.png');
+  background-image: url('../img/fondo.png');
   background-size: cover;
   background-position: center;
   opacity: 0.1;
   z-index: 2;
 }
 
-/* Contenido principal mejorado para mobile */
+/* Contenido principal */
 .content {
   position: relative;
   z-index: 3;
-  padding: 8%;
+  padding: 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
 }
 
-/* Foto de perfil responsive */
+/* Foto de perfil - ESTILOS QUE DEBEN APARECER */
 .photo-frame {
-  width: 28vw;
-  height: 28vw;
-  max-width: 160px;
-  max-height: 160px;
-  min-width: 120px;
-  min-height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   border: 4px solid white;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-  margin-top: 5%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin: 20px 0;
+  background: #f1f1f1;
 }
 
 .photo-frame img {
@@ -82,84 +91,91 @@ body {
   object-fit: cover;
 }
 
-/* Texto completamente responsive */
+/* Texto - VERIFICAR QUE ESTOS ESTILOS SE VEN */
 .info {
   text-align: center;
-  margin: 6% 0;
-  width: 100%;
+  margin: 15px 0;
 }
 
 .info h1 {
-  font-size: clamp(22px, 6vw, 26px);
+  font-size: 24px;
   color: #333;
-  margin: 0 0 2% 0;
-  font-weight: 700;
+  margin-bottom: 5px;
 }
 
 .info h2 {
-  font-size: clamp(14px, 4vw, 16px);
-  color: #555;
-  margin: 0 0 8% 0;
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
   font-weight: 500;
 }
 
-.details {
-  margin: 6% 0;
-}
-
 .details p {
-  font-size: clamp(14px, 4vw, 15px);
+  font-size: 14px;
   color: #444;
-  margin: 3% 0;
+  margin: 10px 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 
-/* Botones sociales responsive */
+/* Botones sociales - VERIFICAR COLORES */
 .social {
   display: flex;
   justify-content: center;
-  gap: 3vw;
-  margin: 5% 0 8%;
-  flex-wrap: wrap;
+  gap: 15px;
+  margin: 25px 0;
 }
 
 .social a {
-  width: clamp(36px, 10vw, 42px);
-  height: clamp(36px, 10vw, 42px);
-  font-size: clamp(16px, 4.5vw, 18px);
-  /* Resto de estilos permanecen igual */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  transition: transform 0.3s;
 }
 
-/* Mensaje responsive */
+.social a:hover {
+  transform: translateY(-3px);
+}
+
+.linkedin { background: #0077B5; }
+.github { background: #333; }
+.email { background: #D44638; }
+.instagram { background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D); }
+.whatsapp { background: #25D366; }
+
+/* Mensaje */
 .message {
   text-align: center;
-  padding: 0 5%;
+  padding: 0 20px;
 }
 
 .message p {
-  font-size: clamp(13px, 3.8vw, 14px);
+  font-size: 14px;
+  color: #555;
   line-height: 1.6;
 }
 
-/* Media queries para ajustes específicos */
-@media (max-width: 600px) {
-  .content {
-    padding: 6%;
+/* Media queries para responsive */
+@media (max-width: 480px) {
+  .vcard {
+    width: 95%;
+    min-height: 550px;
   }
   
   .photo-frame {
-    margin-top: 8%;
-  }
-}
-
-@media (max-width: 400px) {
-  .details p {
-    margin: 4% 0;
+    width: 120px;
+    height: 120px;
   }
   
-  .social {
-    gap: 4vw;
+  .info h1 {
+    font-size: 22px;
   }
 }
