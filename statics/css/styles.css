@@ -129,9 +129,12 @@ body {
 }
 
 .mensaje-box {
+  text-align: justify; /* Justifica el texto */
+  padding: 15px; /* Añade espacio interno para mejor legibilidad */
+  /*max-width: 600px; /* Opcional: establece un ancho máximo */
+  /*margin: 0 auto; /* Opcional: centra el contenedor */
   background: #f9f9f9;
   border-radius: 12px;
-  padding: 15px;
   margin: 0 auto 25px auto;
   max-width: 280px;
 }
@@ -141,19 +144,26 @@ body {
   color: #555;
   line-height: 1.6;
   margin: 0;
-  text-align: center;
-
-
-
-
-/* ... (conserva todo lo anterior) ... */
+  /*text-align: center;*/
+  line-height: 1.6; /* Mejora la legibilidad con mayor interlineado */
 
 .info-section {
-  margin: 0 auto 15px auto; /* Reduje el margen inferior */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente (si hay altura definida) */
+  text-align: center; /* Centra el texto dentro de los elementos */
+  gap: 10px; /* Espacio entre elementos */
+  padding: 20px;  margin: 0 auto 15px auto; /* Reduje el margen inferior */
   max-width: 280px;
-  text-align: center; /* Centrado en lugar de izquierda */
 }
 
+.cargo, .ubicacion, .uni {
+  margin: 5px 0; /* Espaciado entre elementos */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre icono y texto */
+}
 .info-section p {
   font-size: 14px;
   color: #555;
