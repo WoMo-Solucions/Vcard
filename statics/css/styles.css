@@ -1,190 +1,165 @@
+/* Estilos base mejorados */
 body {
   margin: 0;
-  padding: 0;
-  background: #f5f5f5;
+  padding: 20px;
   font-family: 'Rubik', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: #f8f8f8;
 }
 
 .vcard {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  max-width: 380px;
-  width: 90%;
-  padding: 0;
-  text-align: center;
   position: relative;
+  width: 100%;
+  max-width: 340px;
+  min-height: 580px;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.vcard-border-top {
-  height: 6px;
-  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+/* Fondo degradado ámbar suavizado */
+.amber-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    rgba(255, 215, 0, 0.4) 0%,     /* Amarillo muy suave */
+    rgba(245, 222, 179, 0.3) 40%,  /* Abano claro */
+    rgba(245, 222, 179, 0.1) 70%,  /* Más transparente */
+    rgba(245, 222, 179, 0) 100%    /* Desvanecimiento completo */
+  );
+  z-index: 1;
 }
 
-.vcard-border-bottom {
-  height: 4px;
-  background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+/* Fondo de imagen más responsive */
+.bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin-top: 20px;
+  height: 100%;
+  background-image: url('statics/img/fondo.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  z-index: 2;
 }
 
-.logo-wrapper {
-  margin: 25px 0 15px 0;
-}
-
-.logo-circle {
-  width: 120px;
-  height: 120px;
-  background: #f8f8f8;
-  border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-circle img {
-  width: 90px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 50%;
-}
-
-.empresa {
-  font-size: 24px;
-  color: #1a2a6c;
-  font-weight: 800;
-  margin: 10px 0 5px 0;
-}
-
-.nombre {
-  font-size: 16px;
-  font-weight: 600;
-  color: #444;
-  margin: 0 0 20px 0;
-}
-
-.info-section {
-  margin: 0 auto 25px auto;
-  max-width: 280px;
-  text-align: left;
-}
-
-.info-section p {
-  font-size: 14px;
-  color: #555;
-  margin: 0 0 12px 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.info-section p i {
-  color: #3a7bd5;
-  margin-right: 10px;
-  width: 20px;
-  text-align: center;
-}
-
-.uni {
-  border-bottom: none !important;
-}
-
-.icon-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 25px auto;
-  flex-wrap: wrap;
-  max-width: 280px;
-}
-
-.icon-buttons a {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #f8f8f8;
-  color: #3a7bd5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  text-decoration: none;
-}
-
-.icon-buttons a:hover {
-  transform: translateY(-3px);
-  background: #3a7bd5;
-  color: white;
-  box-shadow: 0 6px 12px rgba(58, 123, 213, 0.3);
-}
-
-.mensaje-box {
-  text-align: justify; /* Justifica el texto */
-  padding: 15px; /* Añade espacio interno para mejor legibilidad */
-  /*max-width: 600px; /* Opcional: establece un ancho máximo */
-  /*margin: 0 auto; /* Opcional: centra el contenedor */
-  background: #f9f9f9;
-  border-radius: 12px;
-  margin: 0 auto 25px auto;
-  max-width: 280px;
-}
-
-.mensaje {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.6;
-  margin: 0;
-  /*text-align: center;*/
-  line-height: 1.6; /* Mejora la legibilidad con mayor interlineado */
-
-.info-section {
+/* Contenido principal mejorado para mobile */
+.content {
+  position: relative;
+  z-index: 3;
+  padding: 8%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente */
-  justify-content: center; /* Centra verticalmente (si hay altura definida) */
-  text-align: center; /* Centra el texto dentro de los elementos */
-  gap: 10px; /* Espacio entre elementos */
-  padding: 20px;  margin: 0 auto 15px auto; /* Reduje el margen inferior */
-  max-width: 280px;
+  align-items: center;
+  height: 100%;
 }
 
-.cargo, .ubicacion, .uni {
-  margin: 5px 0; /* Espaciado entre elementos */
+/* Foto de perfil responsive */
+.photo-frame {
+  width: 28vw;
+  height: 28vw;
+  max-width: 160px;
+  max-height: 160px;
+  min-width: 120px;
+  min-height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  margin-top: 5%;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto completamente responsive */
+.info {
+  text-align: center;
+  margin: 6% 0;
+  width: 100%;
+}
+
+.info h1 {
+  font-size: clamp(22px, 6vw, 26px);
+  color: #333;
+  margin: 0 0 2% 0;
+  font-weight: 700;
+}
+
+.info h2 {
+  font-size: clamp(14px, 4vw, 16px);
+  color: #555;
+  margin: 0 0 8% 0;
+  font-weight: 500;
+}
+
+.details {
+  margin: 6% 0;
+}
+
+.details p {
+  font-size: clamp(14px, 4vw, 15px);
+  color: #444;
+  margin: 3% 0;
   display: flex;
   align-items: center;
-  gap: 8px; /* Espacio entre icono y texto */
-}
-.info-section p {
-  font-size: 14px;
-  color: #555;
-  margin: 0 0 5px 0; /* Espacio reducido entre líneas */
-  padding-bottom: 5px;
-  border-bottom: 1px solid #f0f0f0;
-  display: inline-block; /* Para que el centrado funcione mejor */
+  justify-content: center;
 }
 
-/* Ajuste específico para quitar borde inferior del último elemento */
-.info-section p:last-child {
-  border-bottom: none;
+/* Botones sociales responsive */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 3vw;
+  margin: 5% 0 8%;
+  flex-wrap: wrap;
 }
 
-.mensaje {
-  font-size: 14px;
-  color: #555;
+.social a {
+  width: clamp(36px, 10vw, 42px);
+  height: clamp(36px, 10vw, 42px);
+  font-size: clamp(16px, 4.5vw, 18px);
+  /* Resto de estilos permanecen igual */
+}
+
+/* Mensaje responsive */
+.message {
+  text-align: center;
+  padding: 0 5%;
+}
+
+.message p {
+  font-size: clamp(13px, 3.8vw, 14px);
   line-height: 1.6;
-  margin: 0;
-  text-align: justify; /* Solo esto justificado */
-  text-justify: inter-word;
-  padding: 0 10px; /* Pequeño padding para mejor lectura */
 }
+
+/* Media queries para ajustes específicos */
+@media (max-width: 600px) {
+  .content {
+    padding: 6%;
+  }
+  
+  .photo-frame {
+    margin-top: 8%;
+  }
+}
+
+@media (max-width: 400px) {
+  .details p {
+    margin: 4% 0;
+  }
+  
+  .social {
+    gap: 4vw;
+  }
 }
