@@ -1,4 +1,49 @@
+import qrcode
+from PIL import Image
 
+# Configuración
+qr_data = "https://ramiju81.github.io/Vcard/"
+qr_logo_path = "logo.png"
+qr_output_path = "qr_womo.png"
+html_output_path = "index.html"
+
+# 1. Generar el código QR
+qr = qrcode.QRCode(
+    error_correction=qrcode.constants.ERROR_CORRECT_H
+)
+qr.add_data(qr_data)
+qr.make(fit=True)
+
+qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+
+# 2. Procesar el logo con fondo blanco moderado
+logo_size = 80  # Tamaño del logo
+logo = Image.open(qr_logo_path).convert("RGBA")
+logo = logo.resize((logo_size, logo_size), Image.LANCZOS)
+
+# Crear fondo blanco (solo 10px más grande en cada lado)
+bg_size = (logo_size + 20, logo_size + 20)
+background = Image.new("RGBA", bg_size, "white")
+
+# Pegar el logo centrado en el fondo
+logo_pos = (
+    (bg_size[0] - logo_size) // 2,
+    (bg_size[1] - logo_size) // 2
+)
+background.paste(logo, logo_pos, logo)
+
+# 3. Pegar en el QR
+qr_pos = (
+    (qr_img.size[0] - bg_size[0]) // 2,
+    (qr_img.size[1] - bg_size[1]) // 2
+)
+qr_img.paste(background, qr_pos, background)
+
+# 4. Guardar QR
+qr_img.save(qr_output_path)
+
+# 5. HTML ORIGINAL COMPLETO (sin modificaciones)
+html_content = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,3 +106,10 @@
   </div>
 </body>
 </html>
+"""
+
+# 6. Guardar HTML
+with open(html_output_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("✅ QR, HTML generados.")
