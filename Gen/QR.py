@@ -47,63 +47,78 @@ html_content = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Julian Ramirez | Vcard</title>
-  <link rel="stylesheet" href="statics/css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- Iconos de FontAwesome -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julian Ramirez | Tarjeta Digital</title>
+  <!-- Cambia la ruta del CSS así: -->
+  <link rel="stylesheet" href="./statics/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="vcard">
-    <!-- Borde gráfico superior -->
-    <div class="vcard-border-top"></div>
+    <!-- Fondo degradado ámbar -->
+    <div class="amber-fade"></div>
     
-    <div class="logo-wrapper">
-      <div class="logo-circle">
-        <img src="statics/img/foto.jpg" alt="Foto de Julian Ramirez" />
+    <!-- Fondo de imagen -->
+    <div class="bg-pattern"></div>
+    
+    <!-- Contenido principal -->
+    <div class="content">
+      <!-- Foto de perfil con ruta verificada -->
+      <div class="photo-frame">
+        <img src="./statics/img/foto.jpg" alt="Julian Ramirez" 
+             onerror="this.src='https://via.placeholder.com/400'">
+      </div>
+      
+      <!-- Información textual -->
+      <div class="info">
+        <h1>Julian Ramirez</h1>
+        <h2>Profesional en Desarrollo de Software</h2>
+        
+        <div class="details">
+          <p class="cargo"><i class="fas fa-briefcase"></i> Full Stack Developer</p>
+          <p class="ubicacion uni"><i class="fas fa-university"></i> UNICUCES</p>
+          <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> Cali - Colombia</p>
+        </div>
+      </div>
+      
+      <!-- Botones sociales -->
+      <div class="social">
+        <a href="https://www.linkedin.com/in/julianramirezc"title="LinkedIn"  class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/ramiju81" title="github" class="github"><i class="fab fa-github"></i></a>
+        <a href="mailto:juliram81@hotmail.com" title="email" class="email"><i class="fas fa-envelope"></i></a>
+        <a href="https://instagram.com/eljuliramirez" title="instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/573183863532" title="whatsapp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+     
+      <!-- Mensaje -->
+    <div class="mensaje-box">
+      <div class="mensaje">
+      <p>
+        Apasionado por el desarrollo de soluciones digitales que simplifican y transforman procesos reales. <br>
+        Creo en la tecnología como medio para hacer la vida más fácil, automatizada y humana.
       </div>
     </div>
-
-    <h1 class="empresa">Julian Ramirez</h1>
-    <h2 class="nombre">Profesional en Desarrollo de Software</h2>
-    
-    <div class="info-section">
-
-    <p class="cargo"><i class="fas fa-briefcase"></i> Full Stack Developer</p>
-
-    <p class="ubicacion uni"><i class="fas fa-university"></i> UNICUCES</p>
-
-    <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> Cali - Colombia</p>
-
-</div>
-
-
-
-    <div class="icon-buttons">
-      <a href="https://www.linkedin.com/in/julianramirezc" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://github.com/ramiju81" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="mailto:juliram81@hotmail.com" title="Correo" target="_blank"><i class="fas fa-envelope"></i></a>
-      <a href="https://instagram.com/eljuliramirez" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/573183863532" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    </div>
-
-    <div class="mensaje-box">
-
-  <p class="mensaje">
-
-    Apasionado por el desarrollo de soluciones digitales que simplifican y transforman procesos reales. <br>
-
-    Creo en la tecnología como medio para hacer la vida más fácil, automatizada y humana.
-
-  </p>
-
-</div>
-  
-    <!-- Borde gráfico inferior -->
-    <div class="vcard-border-bottom"></div>
   </div>
+
+  <!-- Añade esto para depuración -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verifica si el CSS se cargó
+      const stylesheets = Array.from(document.styleSheets);
+      const cssLoaded = stylesheets.some(sheet => sheet.href && sheet.href.includes('styles.css'));
+      
+      if (!cssLoaded) {
+        console.error('El CSS no se cargó correctamente');
+        // Carga alternativa
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './statics/css/styles.css';
+        document.head.appendChild(link);
+      }
+    });
+  </script>
 </body>
 </html>
 """
