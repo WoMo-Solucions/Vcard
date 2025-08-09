@@ -6,8 +6,7 @@ import math
 qr_data = "https://ramiju81.github.io/Vcard/"
 logo_text_path = "logo.png"   # imagen con las letras JR (se usará como molde)
 qr_logo_path = "logo.png"     # logo que irá en el centro (puede ser el mismo archivo)
-out_path = "QR_Ing Juli.png"
-html_output_path = "index.html"
+out_path = "QR_JR_Metalizado.png"
 
 box_size = 10      # tamaño en px de cada módulo del QR (puedes ajustar)
 border = 4         # borde en módulos del QR
@@ -21,7 +20,7 @@ color_bottom = (70, 150, 160)  # azul-verdoso claro (abajo)
 logo_size = 80
 blank_margin = 6  # espacio extra (px) alrededor del logo dentro del área blanca
 
-# 1. Generar QR base (alto nivel de corrección para permitir overlay)
+# 1) Generar QR base (alto nivel de corrección para permitir overlay)
 qr = qrcode.QRCode(
     error_correction=qrcode.constants.ERROR_CORRECT_H,
     box_size=box_size,
@@ -33,7 +32,7 @@ qr.make(fit=True)
 qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
 w, h = qr_img.size
 
-# 2. Crear máscara a partir de tu logo (molde de las letras "JR")
+# 2) Crear máscara a partir de tu logo (molde de las letras "JR")
 logo_text = Image.open(logo_text_path).convert("RGBA")
 
 # Si la imagen tiene canal alpha, usamos alpha como máscara; si no, binarizamos la luminancia
@@ -61,7 +60,7 @@ pos_x = (w - mask_w) // 2
 pos_y = (h - mask_h) // 2
 mask_full.paste(mask_src, (pos_x, pos_y))
 
-# 3. Reservar área blanca para el logo central (lo dejamos fuera de la máscara)
+# 3) Reservar área blanca para el logo central (lo dejamos fuera de la máscara)
 blank_size = logo_size + blank_margin * 2
 blank_x = (w - blank_size) // 2
 blank_y = (h - blank_size) // 2
@@ -76,7 +75,7 @@ for yy in range(blank_y, blank_y + blank_size):
             continue
         mask_pixels[xx, yy] = 0
 
-# 4. Recolorear SOLO los módulos negros que estén dentro de la máscara con degradado metalizado
+# 4) Recolorear SOLO los módulos negros que estén dentro de la máscara con degradado metalizado
 colored = qr_img.copy()
 px_col = colored.load()
 px_mask = mask_full.load()
@@ -108,103 +107,17 @@ for y in range(h):
             # aplicar color (manteniendo alpha = 255)
             px_col[x, y] = (r, g, b, 255)
 
-# 5. Dibujar el área blanca central (para que el logo repose en blanco)
+# 5) Dibujar el área blanca central (para que el logo repose en blanco)
 draw = ImageDraw.Draw(colored)
 draw.rectangle([blank_x, blank_y, blank_x + blank_size - 1, blank_y + blank_size - 1], fill=(255, 255, 255, 255))
 
-# 6. Pegar logo centrado (sin borde, tal como pediste)
+# 6) Pegar logo centrado (sin borde, tal como pediste)
 logo_center = Image.open(qr_logo_path).convert("RGBA")
 logo_center = logo_center.resize((logo_size, logo_size), Image.LANCZOS)
 logo_pos = ((w - logo_size) // 2, (h - logo_size) // 2)
 colored.paste(logo_center, logo_pos, logo_center)
 
-# 7. HTML ORIGINAL COMPLETO (sin modificaciones)
-html_content = """
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Julian Ramirez | Tarjeta Digital</title>
-  <!-- Cambia la ruta del CSS así: -->
-  <link rel="stylesheet" href="./statics/css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-  <div class="vcard">
-    <!-- Fondo degradado ámbar -->
-    <div class="amber-fade"></div>
-    
-    <!-- Fondo de imagen -->
-    <div class="bg-pattern"></div>
-    
-    <!-- Contenido principal -->
-    <div class="content">
-      <!-- Foto de perfil con ruta verificada -->
-      <div class="photo-frame">
-        <img src="./statics/img/foto.jpg" alt="Julian Ramirez" 
-             onerror="this.src='https://via.placeholder.com/400'">
-      </div>
-      
-      <!-- Información textual -->
-      <div class="info">
-        <h1>Julian Ramirez</h1>
-        <h2>Profesional en Desarrollo de Software</h2>
-        
-        <div class="details">
-          <p class="cargo"><i class="fas fa-briefcase"></i> Full Stack Developer</p>
-          <p class="ubicacion uni"><i class="fas fa-university"></i> UNICUCES</p>
-          <p class="ubicacion"><i class="fas fa-map-marker-alt"></i> Cali - Colombia</p>
-        </div>
-      </div>
-      
-      <!-- Botones sociales -->
-      <div class="social">
-        <a href="https://www.linkedin.com/in/julianramirezc"title="LinkedIn"  class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://github.com/ramiju81" title="github" class="github"><i class="fab fa-github"></i></a>
-        <a href="mailto:juliram81@hotmail.com" title="email" class="email"><i class="fas fa-envelope"></i></a>
-        <a href="https://instagram.com/eljuliramirez" title="instagram" class="instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/573183863532" title="whatsapp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-      </div>
-     
-      <!-- Mensaje -->
-    <div class="mensaje-box">
-      <div class="mensaje">
-      <p>
-        Apasionado por el desarrollo de soluciones digitales que simplifican y transforman procesos reales. <br>
-        Creo en la tecnología como medio para hacer la vida más fácil, automatizada y humana.
-      </div>
-    </div>
-  </div>
-
-  <!-- Añade esto para depuración -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Verifica si el CSS se cargó
-      const stylesheets = Array.from(document.styleSheets);
-      const cssLoaded = stylesheets.some(sheet => sheet.href && sheet.href.includes('styles.css'));
-      
-      if (!cssLoaded) {
-        console.error('El CSS no se cargó correctamente');
-        // Carga alternativa
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = './statics/css/styles.css';
-        document.head.appendChild(link);
-      }
-    });
-  </script>
-</body>
-</html>
-"""
-
-
-# 8. Guardar
+# 7) Guardar
 colored.save(out_path)
+print("✅ QR generado:", out_path)
 
-# 9. Guardar HTML
-with open(html_output_path, "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("✅ QR, HTML generados.")
