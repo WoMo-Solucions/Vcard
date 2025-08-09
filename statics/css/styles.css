@@ -230,8 +230,8 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background-color: #4285F4; /* Azul de Google */
-  color: white;
+  background-color: #4285F4 !important; /* Azul Google */
+  color: white !important;              /* Icono blanco */
   font-size: 1.2em;
   text-decoration: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
