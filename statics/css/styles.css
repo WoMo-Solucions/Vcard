@@ -17,35 +17,37 @@ body {
   align-items: center;
   min-height: 100vh;
   background: #f8f8f8;
-  padding: 20px;
+  padding: 15px;
 }
 
-/* Contenedor principal - VERIFICAR QUE ESTO SE APLIQUE */
-.vcard {
+/* Contenedor principal compacto */
+.vcard {  
+  margin: -30px 0; /* Compensa el espacio extra creado por el escalado */
+  transform: scale(0.75); /* Reduce todo al 90% */
   position: relative;
   width: 100%;
-  max-width: 340px;
-  min-height: 580px;
+  max-width: 360px; /* Un poco más ancho */
+  min-height: 540px; /* Más compacto verticalmente */
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  background: white; /* Fondo blanco por defecto */
+  background: white;
 }
 
-/* Fondo degradado ámbar - VERIFICAR VISUALIZACIÓN */
+/* Fondo degradado ámbar ajustado */
 .amber-fade {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 62%; /* Cobertura ajustada */
   background: linear-gradient(to bottom, 
     var(--color-ambar) 0%,
-    var(--color-ambar-claro) 50%,
+    var(--color-ambar-claro) 60%,
     rgba(255, 255, 255, 0) 100%
   );
   z-index: 1;
-  opacity: 0.4; /* Más transparente */
+  opacity: 0.4;
 }
 
 /* Fondo de imagen */
@@ -62,18 +64,18 @@ body {
   z-index: 2;
 }
 
-/* Contenido principal */
+/* Contenido principal - Compacto */
 .content {
   position: relative;
   z-index: 3;
-  padding: 20px;
+  padding: 15px 20px 10px; /* Menos padding inferior */
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Foto de perfil - ESTILOS QUE DEBEN APARECER */
+/* Foto de perfil - Posición más alta */
 .photo-frame {
   width: 140px;
   height: 140px;
@@ -81,7 +83,7 @@ body {
   border: 4px solid white;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  margin: 20px 0;
+  margin: 10px 0 5px; /* Margen superior reducido */
   background: #f1f1f1;
 }
 
@@ -91,41 +93,42 @@ body {
   object-fit: cover;
 }
 
-/* Texto - VERIFICAR QUE ESTOS ESTILOS SE VEN */
+/* Información textual - Más compacta */
 .info {
   text-align: center;
-  margin: 15px 0;
+  margin: 5px 0 10px; /* Menos espacio */
 }
 
 .info h1 {
   font-size: 24px;
   color: #333;
-  margin-bottom: 5px;
+  margin-bottom: 3px; /* Reducido */
 }
 
 .info h2 {
   font-size: 16px;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Reducido */
   font-weight: 500;
 }
 
 .details p {
   font-size: 14px;
   color: #444;
-  margin: 10px 0;
+  margin: 8px 0; /* Reducido */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-/* Botones sociales - VERIFICAR COLORES */
+/* Botones sociales - Posición más alta */
 .social {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 25px 0;
+  gap: 12px;
+  margin: 10px 0 15px; /* Margen superior reducido */
+  flex-wrap: wrap;
 }
 
 .social a {
@@ -151,31 +154,62 @@ body {
 .instagram { background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D); }
 .whatsapp { background: #25D366; }
 
-/* Mensaje */
-.message {
-  text-align: center;
-  padding: 0 20px;
+/* Mensaje - Ajustes específicos */
+.mensaje-box {
+  width: 100%;
+  max-width: 320px; /* Más ancho */
+  margin: 5px auto 10px; /* Posición más alta */
+  padding: 0;
 }
 
-.message p {
+.mensaje {
   font-size: 14px;
-  color: #555;
   line-height: 1.6;
+  text-align: justify;
+  text-justify: inter-word;
+  color: #555;
+  padding: 14px;
+  background: transparent; /* Fondo transparente */
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.05); /* Borde muy sutil */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03); /* Sombra ligera */
 }
 
-/* Media queries para responsive */
-@media (max-width: 480px) {
+/* Responsive para todos los dispositivos */
+@media (max-width: 400px) {
   .vcard {
-    width: 95%;
-    min-height: 550px;
+    max-width: 320px;
+    min-height: 520px;
   }
   
   .photo-frame {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
   }
   
-  .info h1 {
-    font-size: 22px;
+  .mensaje-box {
+    max-width: 290px;
+  }
+}
+
+@media (max-height: 700px) {
+  .vcard {
+    min-height: 500px;
+    transform: scale(0.95);
+  }
+  
+  .content {
+    padding: 12px 15px 8px;
+  }
+}
+
+/* Tablet responsive */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .vcard {
+    max-width: 380px;
+  }
+  
+  .mensaje-box {
+    max-width: 340px;
   }
 }
