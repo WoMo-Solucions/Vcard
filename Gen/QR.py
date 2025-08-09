@@ -118,7 +118,27 @@ logo_center = logo_center.resize((logo_size, logo_size), Image.LANCZOS)
 logo_pos = ((w - logo_size) // 2, (h - logo_size) // 2)
 colored.paste(logo_center, logo_pos, logo_center)
 
-# 7. HTML ORIGINAL COMPLETO (sin modificaciones)
+#7 Crear VCF
+vcf_content = f"""BEGIN:VCARD
+VERSION:3.0
+FN:{nombre}
+ORG:{empresa}
+TITLE:{cargo}
+TEL:{telefono}
+EMAIL:{email}
+URL:{linkedin}
+URL:{github}
+URL:{instagram}
+URL:{web}
+ADR;TYPE=home:;;{direccion};;;;
+END:VCARD
+"""
+
+# 8. Guardar en statics
+with open("./statics/julianramirez.vcf", "w", encoding="utf-8") as vcf_file:
+    vcf_file.write(vcf_content)
+
+# 9. HTML ORIGINAL COMPLETO (sin modificaciones)
 html_content = """
 <!DOCTYPE html>
 <html lang="es">
@@ -166,6 +186,13 @@ html_content = """
         <a href="mailto:juliram81@hotmail.com" title="email" class="email"><i class="fas fa-envelope"></i></a>
         <a href="https://instagram.com/eljuliramirez" title="instagram" class="instagram"><i class="fab fa-instagram"></i></a>
         <a href="https://wa.me/573183863532" title="whatsapp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+        
+    <!-- Botón solo con icono para guardar contacto -->
+        <div class="guardar-contacto">
+            <a href="./statics/julianramirez.vcf" title="Guardar contacto">
+            <i class="fas fa-address-book"></i>
+            </a>
+        </div>
       </div>
      
       <!-- Mensaje -->
@@ -173,7 +200,7 @@ html_content = """
       <div class="mensaje">
       <p>
         Apasionado por el desarrollo de soluciones digitales que simplifican y transforman procesos reales. <br>
-        Creo en la tecnología como medio para hacer la vida más fácil, automatizada y humana.
+        Creo en la tecnología como medio para hacer la vida más fácil y automatizada.
       </div>
     </div>
   </div>
