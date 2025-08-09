@@ -248,8 +248,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #4285F4; /* azul estilo Google */
-  color: white;
+  background-color: white; 
+  color:  #4285F4; /* azul estilo Google */
   width: 42px;
   height: 42px;
   border-radius: 50%;
