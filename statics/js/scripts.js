@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // --- 1. Verificar que el CSS esté cargado ---
+    const vcfUrl = "./statics/julianramirez.vcf";
+
+    // --- Verificar que el CSS esté cargado ---
     const stylesheets = Array.from(document.styleSheets);
     const cssLoaded = stylesheets.some(sheet => sheet.href && sheet.href.includes('styles.css'));
 
@@ -11,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.head.appendChild(link);
     }
 
-    // --- 2. Cargar datos desde el VCF ---
-    fetch("./statics/julianramirez.vcf")
+    // --- Cargar datos desde el VCF ---
+    fetch(vcfUrl)
         .then(res => res.text())
         .then(data => {
             const getValue = (key) => {
@@ -47,21 +49,29 @@ document.addEventListener("DOMContentLoaded", function () {
             if (urls[0]) document.querySelector(".linkedin").href = urls[0];
             if (urls[1]) document.querySelector(".github").href = urls[1];
             if (urls[2]) document.querySelector(".instagram").href = urls[2];
+
+            // --- Guardar contacto (nuevo: abrir VCF directo) ---
+            const guardarBtn = document.getElementById("guardarContacto");
+            if (guardarBtn) {
+                guardarBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    window.location.href = vcfUrl; // abre directamente el VCF
+                });
+            }
+
+            /* --- Guardar contacto (versión anterior: descarga VCF) ---
+            if (guardarBtn) {
+                guardarBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const link = document.createElement("a");
+                    link.href = vcfUrl;
+                    link.download = "Julian_Ramirez.vcf";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+            }
+            */
         })
         .catch(err => console.error("Error cargando datos del VCF:", err));
-
-    // --- 3. Botón Guardar Contacto ---
-    const guardarBtn = document.getElementById("guardarContacto");
-    if (guardarBtn) {
-        guardarBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            const vcfUrl = "./statics/julianramirez.vcf";
-            const link = document.createElement("a");
-            link.href = vcfUrl;
-            link.download = "Julian_Ramirez.vcf";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        });
-    }
 });
