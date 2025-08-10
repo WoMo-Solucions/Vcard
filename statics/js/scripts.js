@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const nombre = getValue("FN");
-            const empresa = getValue("ORG");
-            const cargo = getValue("TITLE");
+            const empresa = "";
+            const cargo = getValue("ORG");
             const telefono = getValue("TEL");
             const email = getValue("EMAIL");
             const direccionRaw = getValue("ADR;TYPE=home");
@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Rellenar HTML
             document.querySelector("h1").innerText = nombre;
-            document.querySelector("h2").innerText = empresa;
+            document.querySelector("h2").innerText = profesion;
             document.querySelector(".cargo").innerHTML = `<i class="fas fa-briefcase"></i> ${cargo}`;
-            document.querySelector(".ubicacion.uni").innerHTML = `<i class="fas fa-university"></i> ${universidad}`;
+            //document.querySelector(".ubicacion.uni").innerHTML = `<i class="fas fa-university"></i> ${universidad}`;
             document.querySelector(".ubicacion.direccion").innerHTML = `<i class="fas fa-map-marker-alt"></i> ${direccion}`;
             document.querySelector(".mensaje p").innerText = nota;
 
