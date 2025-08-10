@@ -1,20 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const vcfUrl = "./statics/julianramirez.vcf";
-
-    // --- Verificar que el CSS esté cargado ---
+    // --- 1. Verificar que el CSS esté cargado ---
     const stylesheets = Array.from(document.styleSheets);
     const cssLoaded = stylesheets.some(sheet => sheet.href && sheet.href.includes('styles.css'));
 
     if (!cssLoaded) {
-        console.warn('El CSS no se cargó correctamente, cargando de respaldo...');
+        console.error('El CSS no se cargó correctamente');
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = './statics/css/styles.css';
         document.head.appendChild(link);
     }
 
-    // --- Cargar datos desde el VCF ---
-    fetch(vcfUrl)
+    // --- 2. Cargar datos desde el VCF ---
+    fetch("./statics/julianramirez.vcf")
         .then(res => res.text())
         .then(data => {
             const getValue = (key) => {
@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const urls = data.match(/URL:(.*)/gi)?.map(u => u.replace("URL:", "").trim()) || [];
 
-            // --- Rellenar HTML ---
+            // Rellenar HTML
             document.querySelector("h1").innerText = nombre;
             document.querySelector("h2").innerText = empresa;
             document.querySelector(".cargo").innerHTML = `<i class="fas fa-briefcase"></i> ${cargo}`;
@@ -43,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".ubicacion.direccion").innerHTML = `<i class="fas fa-map-marker-alt"></i> ${direccion}`;
             document.querySelector(".mensaje p").innerText = nota;
 
-            // --- Enlaces ---
+            // Enlaces
             document.querySelector(".whatsapp").href = `https://wa.me/${telefono.replace("+", "")}`;
             document.querySelector(".email").href = `mailto:${email}`;
             if (urls[0]) document.querySelector(".linkedin").href = urls[0];
@@ -52,23 +50,18 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(err => console.error("Error cargando datos del VCF:", err));
 
-    // --- Botón Guardar Contacto ---
+    // --- 3. Botón Guardar Contacto ---
     const guardarBtn = document.getElementById("guardarContacto");
     if (guardarBtn) {
         guardarBtn.addEventListener("click", function (e) {
             e.preventDefault();
-
-            // 🔹 Método para abrir directo el VCF (si el servidor envía las cabeceras correctas)
-            window.location.href = vcfUrl;
-
-            /* 🔸 Método anterior de descarga manual (comentado por si lo quieres usar)
+            const vcfUrl = "./statics/julianramirez.vcf";
             const link = document.createElement("a");
             link.href = vcfUrl;
             link.download = "Julian_Ramirez.vcf";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            */
         });
     }
 });
