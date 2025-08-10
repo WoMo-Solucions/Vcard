@@ -2,7 +2,7 @@ BEGIN:VCARD
 VERSION:3.0
 FN:Julian Ramirez
 ORG:Full Stack & ABAP Developer
-TITLE: Developer
+TITLE: Desarrollador de Software
 TEL:+573183863532
 EMAIL:juliram81@hotmail.com
 URL:https://www.linkedin.com/in/julianramirezc
@@ -13,3 +13,4 @@ ADR;TYPE=home:;;Cali - Colombia;;;;
 NOTE:Apasionado por el desarrollo de soluciones digitales que simplifican y transforman procesos reales. Creo en la tecnología como medio para hacer la vida más fácil y automatizada.
 X-SCHOOL:UNICUCES
 END:VCARD
+
