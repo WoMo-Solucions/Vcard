@@ -214,7 +214,6 @@ body {
   }
 }
 
-/* Ajuste específico solo para el botón de guardar contacto */
 /* Botón de Guardar Contacto - Flotante y sin afectar el layout */
 .guardar-contacto {
   position: absolute; /* Lo saca del flujo normal */
@@ -260,4 +259,16 @@ body {
 
 .guardar-contacto a:hover {
   background-color: #3367D6;
+}
+
+@media (max-width: 480px) {
+  .vcard {
+    max-width: 92% !important;   /* usa casi todo el ancho disponible */
+    min-height: 540px !important; /* más altura */
+  }
+
+  .content {
+    padding-top: 40px !important;   /* más espacio arriba */
+    padding-bottom: 40px !important; /* más espacio abajo */
+  }
 }
