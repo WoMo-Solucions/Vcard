@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // --- 1. Verificar que el CSS esté cargado ---
+    const vcfUrl = "./statics/julianramirez.vcf";
+
+    // --- Verificar que el CSS esté cargado ---
     const stylesheets = Array.from(document.styleSheets);
     const cssLoaded = stylesheets.some(sheet => sheet.href && sheet.href.includes('styles.css'));
 
     if (!cssLoaded) {
-        console.error('El CSS no se cargó correctamente');
+        console.warn('El CSS no se cargó correctamente, cargando de respaldo...');
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = './statics/css/styles.css';
         document.head.appendChild(link);
     }
 
-    // --- 2. Cargar datos desde el VCF ---
-    fetch("./statics/julianramirez.vcf")
+    // --- Cargar datos desde el VCF ---
+    fetch(vcfUrl)
         .then(res => res.text())
         .then(data => {
             const getValue = (key) => {
@@ -22,8 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const nombre = getValue("FN");
-            const empresa = "";
-            const cargo = getValue("ORG");
+            const profesion = getValue("ORG"); // Profesión
+            const empresa = ""; // Vacío
+            const cargo = getValue("TITLE");
             const telefono = getValue("TEL");
             const email = getValue("EMAIL");
             const direccionRaw = getValue("ADR;TYPE=home");
@@ -33,15 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const urls = data.match(/URL:(.*)/gi)?.map(u => u.replace("URL:", "").trim()) || [];
 
-            // Rellenar HTML
+            // --- Rellenar HTML ---
             document.querySelector("h1").innerText = nombre;
-            document.querySelector("h2").innerText = profesion;
+            document.querySelector("h2").innerText = profesion;  // Profesión en lugar de empresa
             document.querySelector(".cargo").innerHTML = `<i class="fas fa-briefcase"></i> ${cargo}`;
-            //document.querySelector(".ubicacion.uni").innerHTML = `<i class="fas fa-university"></i> ${universidad}`;
+            document.querySelector(".ubicacion.uni").innerHTML = `<i class="fas fa-university"></i> ${universidad}`;
             document.querySelector(".ubicacion.direccion").innerHTML = `<i class="fas fa-map-marker-alt"></i> ${direccion}`;
             document.querySelector(".mensaje p").innerText = nota;
 
-            // Enlaces
+            // --- Enlaces ---
             document.querySelector(".whatsapp").href = `https://wa.me/${telefono.replace("+", "")}`;
             document.querySelector(".email").href = `mailto:${email}`;
             if (urls[0]) document.querySelector(".linkedin").href = urls[0];
@@ -50,18 +53,19 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(err => console.error("Error cargando datos del VCF:", err));
 
-    // --- 3. Botón Guardar Contacto ---
+    // --- Botón Guardar Contacto ---
     const guardarBtn = document.getElementById("guardarContacto");
     if (guardarBtn) {
         guardarBtn.addEventListener("click", function (e) {
             e.preventDefault();
-            const vcfUrl = "./statics/julianramirez.vcf";
-            const link = document.createElement("a");
-            link.href = vcfUrl;
-            link.download = "Julian_Ramirez.vcf";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+
+            const partesNombre = nombre.trim().split(" ");
+            const nombreSolo = partesNombre.slice(0, -1).join(" ");
+            const apellido = partesNombre.slice(-1).join(" ");
+            const nombreCompleto = `${nombreSolo} ${apellido}`.trim();
+
+            const urlGoogleContacts = `https://contacts.google.com/new?name=${encodeURIComponent(nombreCompleto)}&email=${encodeURIComponent(email)}`;
+            window.open(urlGoogleContacts, "_blank");
         });
     }
 });
