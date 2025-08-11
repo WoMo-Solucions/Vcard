@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw
 import math
 
 # ---------- CONFIG ----------
-qr_data = "https://ramiju81.github.io/Vcard/"
+qr_data = "https://womo-solucions.github.io/Vcard/"
 logo_text_path = "logo.png"   # imagen con las letras JR (se usará como molde)
 qr_logo_path = "logo.png"     # logo que irá en el centro (puede ser el mismo archivo)
 out_path = "QR_JR_Metalizado.png"
