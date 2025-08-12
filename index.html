@@ -27,7 +27,12 @@
         <h2></h2> <!-- Empresa -->
         <div class="details">
           <p class="cargo"><i class="fas fa-briefcase"></i></p> <!-- Cargo -->
-          <p class="ubicacion uni"><i class="fas fa-university"></i></p> <!-- Universidad -->
+          <!-- Certificado Profesional (se muestra solo si existe en VCF) -->
+          <p id="credencial" class="cargo credencial" hidden>
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span></span>
+          </p>
+                <p class="ubicacion uni"><i class="fas fa-university"></i></p> <!-- Universidad -->
           <p class="ubicacion direccion"><i class="fas fa-map-marker-alt"></i></p> <!-- Dirección -->
         </div>
       </div>
