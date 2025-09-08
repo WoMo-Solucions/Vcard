@@ -272,3 +272,32 @@ body {
     padding-bottom: 40px !important; /* más espacio abajo */
   }
 }
+/* ===== PARCHE SOLO MÓVIL (≤480px): tamaño real y sin huecos ===== */
+@media (max-width: 480px) {
+  /* Evita el “aire” del centrado vertical en móvil */
+  body {
+    display: block !important;
+    min-height: auto !important;
+    padding: 12px !important;
+  }
+
+  /* Muestra la tarjeta a tamaño real (sin escala) y centrada */
+  .vcard {
+    transform: none !important;    /* quita el scale solo en móvil */
+    margin: 0 auto !important;     /* centrada horizontal */
+    max-width: 100% !important;    /* usa todo el ancho del teléfono */
+    min-height: auto !important;   /* crece según contenido */
+  }
+
+  /* Ajuste leve del degradado para no “comerse” el contenido */
+  .amber-fade { height: 50% !important; }
+
+  /* Respira sin generar huecos */
+  .content {
+    padding-top: 18px !important;
+    padding-bottom: 16px !important;
+  }
+
+  /* El texto puede usar todo el ancho disponible */
+  .mensaje-box { max-width: 100% !important; }
+}
